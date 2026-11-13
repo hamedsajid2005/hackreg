@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-500: #06f4ed;
+    --brand-700: #00a4c2;
+    --ink-950: #04070b;
+  }
+
+  * {
+    @apply border-line;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-ink-950 text-slate-200 antialiased;
+    background-image:
+      radial-gradient(60rem 40rem at 12% -10%, rgba(6, 244, 237, 0.10), transparent 60%),
+      radial-gradient(50rem 34rem at 92% 4%, rgba(14, 127, 181, 0.12), transparent 62%);
+    background-repeat: no-repeat;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(6, 244, 237, 0.28);
+    color: #ffffff;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight text-white;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .text-gradient {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
+  }
+
+  .surface {
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm;
+  }
+
+  .surface-hover {
+    @apply transition duration-300 hover:border-brand-500/40 hover:bg-white/[0.055] hover:shadow-glow;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-500/25 bg-brand-500/[0.08] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-200;
+  }
+
+  .grid-backdrop {
+    @apply pointer-events-none absolute inset-0 bg-grid-fade bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_72%)];
+  }
+
+  .logo-plate {
+    /* The official logo artwork is authored on a black plate. This container keeps
+       it legible and untouched — no recolouring, cropping or distortion. */
+    @apply flex items-center justify-center overflow-hidden rounded-xl bg-black ring-1 ring-white/10;
+  }
+
+  .prose-legal h2 {
+    @apply mt-10 mb-3 text-lg font-semibold text-white;
+  }
+  .prose-legal p {
+    @apply mb-4 text-[15px] leading-relaxed text-slate-400;
+  }
+  .prose-legal li {
+    @apply mb-2 ml-5 list-disc text-[15px] leading-relaxed text-slate-400;
+  }
+}
+
+/* Printing: used by the receipt and the confirmation page */
+@media print {
+  .no-print { display: none !important; }
+  body {
+    background: #ffffff !important;
+    color: #0b1016 !important;
+    background-image: none !important;
+  }
+  .print-plain, .print-plain * {
+    color: #0b1016 !important;
+    background: transparent !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+}

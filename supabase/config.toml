@@ -1,0 +1,55 @@
+# Supabase CLI configuration for the Zelvation registration portal.
+# This project shares a Supabase project with the submission/evaluation platform:
+# the `zelvation` schema keeps registration data fully isolated.
+
+project_id = "zelvation-registration-portal"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public", "zelvation"]
+extra_search_path = ["public", "extensions", "zelvation"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 15
+
+[db.seed]
+enabled = false
+
+[storage]
+enabled = true
+file_size_limit = "5MiB"
+
+[functions.create-registration]
+verify_jwt = false
+
+[functions.payment-webhook]
+# Gateway webhooks are authenticated by HMAC signature, not by a JWT.
+verify_jwt = false
+
+[functions.payment-status]
+verify_jwt = false
+
+[functions.registration-details]
+verify_jwt = false
+
+[functions.registration-receipt]
+verify_jwt = false
+
+[functions.resend-confirmation-email]
+verify_jwt = false
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/organizer"]
+jwt_expiry = 3600
+
+[auth.email]
+enable_signup = false
+enable_confirmations = false
+
+[studio]
+enabled = true
